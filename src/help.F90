@@ -73,6 +73,7 @@ contains
     call message(0," --xray        :: computes the x-ray powder diffraction spectrum")
     call message(0," --msd         :: computes the mean square displacement")
     call message(0," --stein       :: computes the Steinhardt's order parameter")
+    call message(0," --lichtest    :: classify ice types using LICH-TEST")
 
     call message(2)
     call message(0,"%%%%% Special actions ")
@@ -120,6 +121,7 @@ contains
     use moduleSteinhardt
     use moduleCommonNeighboursAnalysis
     use moduleMergeFiles
+    use moduleLichTest
 
 #ifdef GPTA_PLUMED
     use modulePlumedInterface
@@ -231,6 +233,7 @@ contains
     if (cmd == "--msd"              ) call computeMSDHelp()
     if (cmd == "--stein"            ) call computeSteinhardtHelp()
     if (cmd == "--cna"              ) call cnaActionHelp()
+    if (cmd == "--lichtest"         ) call computeLichTestHelp()
 
 
 #ifdef GPTA_PLUMED

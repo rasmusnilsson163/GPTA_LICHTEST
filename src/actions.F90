@@ -32,6 +32,7 @@ subroutine initialiseActions()
   use moduleSteinhardt
   use moduleCommonNeighboursAnalysis
   use moduleMergeFiles
+  use moduleLichTest
 
 #ifdef GPTA_PLUMED
   use modulePlumedInterface
@@ -88,6 +89,7 @@ subroutine initialiseActions()
     if (actionType(i) == "--msd"              ) allActions(i) % work => computeMSD
     if (actionType(i) == "--stein"            ) allActions(i) % work => computeSteinhardt
     if (actionType(i) == "--cna"              ) allActions(i) % work => cnaAction
+    if (actionType(i) == "--lichtest"         ) allActions(i) % work => computeLichTest
 
 #ifdef GPTA_PLUMED
     if (actionType(i) == "--plumed" ) allActions(i) % work => plumedInterface
