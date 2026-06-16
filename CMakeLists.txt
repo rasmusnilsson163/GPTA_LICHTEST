@@ -44,6 +44,7 @@ set(SOURCES
     src/help.F90
     src/inertiaTensor.F90
     src/legendre.F90
+    src/lich_test.F90
     src/meanSquareDisplacement.F90
     src/molecularProperties.F90
     src/mergeFiles.F90
