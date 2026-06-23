@@ -103,13 +103,13 @@ subroutine readCoordinatesPDB(uinp,natoms,pos,label,charge,hmat,element,go)
 
 end subroutine readCoordinatesPDB
 
-subroutine writeCoordinatesPDB(uout,lpdb2)
+subroutine writeCoordinatesPDB(uout,lpdb2,lconect)
   use moduleVariables, only: real64
   use moduleSystem 
   use moduleElements 
   implicit none
   integer, intent(in) :: uout
-  logical, intent(in) :: lpdb2
+  logical, intent(in) :: lpdb2,lconect
 
   character(len=100) :: line
   integer :: iatm
@@ -186,15 +186,17 @@ subroutine writeCoordinatesPDB(uout,lpdb2)
       end do
 
       write(uout,'("ENDMDL")')
-      do iatm=1,frame % natoms
-        itmp = nBonds(iatm)
-        if (itmp>4) then
-          write(uout,'("CONECT",5i5)') iatm , newList(1:4,iatm)
-          write(uout,'("CONECT",5i5)') iatm , newList(5:itmp,iatm)
-        else if (itmp>0) then
-          write(uout,'("CONECT",5i5)') iatm , newList(1:itmp,iatm)
-        end if
-        enddo
+      if (lconect) then
+        do iatm=1,frame % natoms
+          itmp = nBonds(iatm)
+          if (itmp>4) then
+            write(uout,'("CONECT",5i5)') iatm , newList(1:4,iatm)
+            write(uout,'("CONECT",5i5)') iatm , newList(5:itmp,iatm)
+          else if (itmp>0) then
+            write(uout,'("CONECT",5i5)') iatm , newList(1:itmp,iatm)
+          end if
+        end do
+      end if
     end block
 
   else

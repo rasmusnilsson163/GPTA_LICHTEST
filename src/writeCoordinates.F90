@@ -25,7 +25,7 @@ contains
     logical, pointer :: actionInitialisation
     logical, pointer :: firstAction
     type(fileTypeDef), pointer :: outputFile
-    logical :: lappend
+    logical :: lappend,lconect
 
     character(len=STRLEN), pointer :: forcefieldFile
     character(len=STRLEN), pointer :: forcefieldFile2
@@ -72,6 +72,8 @@ contains
       if (outputFile % fname(1:1) == "+") call message(-1,"--o : output filename cannot start with '+'",str=outputFile % fname)
 
       call assignFlagValue(actionCommand,"+append ",lappend,.false.)
+      call assignFlagValue(actionCommand,"+conect",lconect,.true.)
+
       if (lappend) then
         call initialiseFile(outputFile, outputFile % fname, fstatus='unknown', fposition='append')
         header = .false. ! Flag for formats that require a header
