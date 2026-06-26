@@ -68,9 +68,18 @@ By using the `--o` action in combination with the `--lichtest` action, the user 
 Here are some examples of using LICH-TEST in GPTA:
 ```
 gpta.x --i coord.pdb traj.dcd --lichtest +s Ow,o +out lichtest.out
-gpta.x --i coord.pdb --lichtest +s mW --o labeled_ice.pdb
+gpta.x --i coord.pdb --lichtest +s mW --o labeled_ice.pdb +noconect
 gpta.x --i coord.pdb --lichtest +s mW +minscore 0.6 --o labeled_ice.pdb
 gpta.x --i coord.pdb --lichtest +s o,oh,ohs +rcut 2.5 --o labeled_ice.pdb
+```
+
+# Additional features
+Aside from the implementation of LICH-TEST, this version of GPTA also has some other additional features. These are described below.
+## `+noconect` argument for `--o <pdbfile>.pdb`
+By adding the argument `+noconect` after the name of an ouput `.pdb` file one can disable the writing of bonds between atoms found at the end of `.pdb` files. This can be usefull if the bond information is of limited importance for the project, and one wants to reduce the filesize of the output. 
+Example:
+```
+gpta.x --i coord.pdb --top --o out.pdb +noconect
 ```
 
 # Bugs and Notes
