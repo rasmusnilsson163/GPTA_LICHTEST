@@ -60,7 +60,7 @@ contains
     call message(0,"This action uses LICH-TEST to classify ice structures")
     call message(0,"Examples:")
     call message(0,"  gpta.x --i coord.pdb traj.dcd --lichtest +s Ow,o +out lichtest.out")
-    call message(0,"  gpta.x --i coord.pdb --lichtest +s mW --o labeled_ice.pdb")
+    call message(0,"  gpta.x --i coord.pdb --lichtest +s mW --o labeled_ice.pdb +noconect")
     call message(0,"  gpta.x --i coord.pdb --lichtest +s mW +minscore 0.6 --o labeled_ice.pdb")
     call message(0,"  gpta.x --i coord.pdb --lichtest +s o,oh,ohs +rcut 2.5 --o labeled_ice.pdb")
   end subroutine computeLichTestHelp

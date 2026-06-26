@@ -25,7 +25,8 @@ contains
     logical, pointer :: actionInitialisation
     logical, pointer :: firstAction
     type(fileTypeDef), pointer :: outputFile
-    logical :: lappend,lconect
+    logical :: lappend
+    logical, pointer :: lnoconect
 
     character(len=STRLEN), pointer :: forcefieldFile
     character(len=STRLEN), pointer :: forcefieldFile2
@@ -50,6 +51,7 @@ contains
     forcefieldFile2      => a % stringVariables(2)
     header               => a % logicalVariables(1)
     internalOutput       => a % logicalVariables(2)
+    lnoconect            => a % logicalVariables(3)
 
     if (actionInitialisation) then
       actionInitialisation = .false.
@@ -72,7 +74,7 @@ contains
       if (outputFile % fname(1:1) == "+") call message(-1,"--o : output filename cannot start with '+'",str=outputFile % fname)
 
       call assignFlagValue(actionCommand,"+append ",lappend,.false.)
-      call assignFlagValue(actionCommand,"+conect",lconect,.true.)
+      call assignFlagValue(actionCommand,"+noconect",lnoconect,.false.)
 
       if (lappend) then
         call initialiseFile(outputFile, outputFile % fname, fstatus='unknown', fposition='append')
@@ -96,7 +98,6 @@ contains
         end if
       endif
 #endif
-      
       if (outputFile % ftype == "lmp") then
       
         ! LAMMPS forcefield file
@@ -149,20 +150,16 @@ contains
         end if
 
       end if
-
       call assignFlagValue(actionCommand,"+bohr ",outputCoordInBohr,.false.)
       call assignFlagValue(actionCommand,"+frac ",outputCoordInFractional,.false.)
-
       ! The neigbours' list is require for the topology
       if (any(outputFile % ftype == ["lmp ","pdb2","pdbx","psf ","arc "])) then
         a % requiresNeighboursList = .true.
       end if
 
       call checkUsedFlags(actionCommand)
-
       return
     end if
-
     ! Normal processing of the frame
     if (frameReadSuccessfully .or. internalOutput) then
 
@@ -203,10 +200,10 @@ contains
         call writeCoordinatesXYZext(outputFile % funit)
 
       else if (outputFile % ftype == "pdb2") then
-        call writeCoordinatesPDB(outputFile % funit,.false.)
+        call writeCoordinatesPDB(outputFile % funit,.false.,lnoconect)
 
       else if (outputFile % ftype == "pdb") then
-        call writeCoordinatesPDB(outputFile % funit,.true.)
+        call writeCoordinatesPDB(outputFile % funit,.true.,lnoconect)
 
       else if (outputFile % ftype == "pdbx") then
         call writeCoordinatesPDBx(outputFile % funit)
