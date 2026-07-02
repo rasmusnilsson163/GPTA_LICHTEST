@@ -1,7 +1,7 @@
 # What GPTA_LCIH-TEST?
 This project is an implementation of the LICH-TEST algorithm in the program GPTA. 
 
-LICH-TEST is an algorithm used to identify and categorize ice-like atoms. The algorithm was first published [here](https://pubs.acs.org/doi/10.1021/acs.jpcb.1c01926) (10.1021/acs.jpcb.1c01926), and has previously been implemented in MATLAB and Python, which have their own git-hub page [here](https://github.com/opakarin/lich-test).
+LICH-TEST is an algorithm used to identify and categorize ice-like atoms. The algorithm was first published [here](https://pubs.acs.org/doi/10.1021/acs.jpcb.1c01926) (10.1021/acs.jpcb.1c01926), and has previously been implemented in MATLAB and Python, and has its own git-hub page [here](https://github.com/opakarin/lich-test).
 
 GPTA is shorthand for General Purpose Trajectory Analyzer. It is developed by Paolo Raiteri and has its own github page [here](https://github.com/praiteri/GPTA/tree/main). The program is used to make analysis and manipulation of structure files easy. 
 
